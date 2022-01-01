@@ -36,7 +36,6 @@ const userRoutes = require('./routes/users');
 // database connection
 const dbUrl = process.env.MONGODB_URL || 'mongodb://localhost:27017/yelp-campDB';
 mongoose.connect(dbUrl);
-
 const db = mongoose.connection;
 db.on('error', (err) => console.log(err))
 db.once('open', () => console.log('DB connected'))
@@ -49,8 +48,10 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname ,'public')));
 app.use(express.urlencoded({extended: true}));
 
+const secret = process.env.SECRET || 'somesecret';
 const store = new MongoStore({
    mongoUrl: dbUrl,
+   secret,
    touchAfter: 24 * 60 * 60,
 });
 
@@ -61,12 +62,12 @@ store.on('error', (e) => {
 const sessionConfig = {
    store,
    name: "Session",
-   secret: process.env.SESSION_SECRET,
+   secret,
    resave: false,
    saveUninitialized: true,
    cookie: {
       httpOnly: true,
-      secure: true,
+      // secure: true,
       expires: Date.now() + (1000 * 60 * 60 * 24 * 7), //maxAge of one week
       maxAge: 1000 * 60 * 60 * 24 * 7 ,
    }
