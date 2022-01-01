@@ -112,4 +112,4 @@ app.use((err, req, res, next) => {
    res.status(statusCode).render('error', { err });
 })
 
-app.listen(process.env.port || 3000, () => console.log('Server connected'))
+app.listen(process.env.PORT || 3000, () => console.log('Server connected'))
