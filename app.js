@@ -6,6 +6,7 @@ if(process.env.NODE_ENV !== 'production'){
 const express = require('express');
 const app = express();
 const path = require('path');
+const favicon = require('serve-favicon');
 const Joi = require('joi');
 const ejsMate = require('ejs-mate');
 const mongoose = require('mongoose');
@@ -47,6 +48,7 @@ app.set('view engine','ejs');
 app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname ,'public')));
 app.use(express.urlencoded({extended: true}));
+app.use(favicon(__dirname + '/public/assets/favicon.ico'));
 
 const secret = process.env.SECRET || 'somesecret';
 const store = new MongoStore({
