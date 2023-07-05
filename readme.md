@@ -20,7 +20,7 @@
 ### Links
 
 - [Github URL](https://github.com/Tejas-117/Yelp-Camp)
-- [Live Site URL](https://yelp-camp-417.herokuapp.com/)
+- [Live Site URL](https://yelp-camp-amber-six.vercel.app/)
 
 ## My process
 
